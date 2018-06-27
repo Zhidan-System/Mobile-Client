@@ -6,10 +6,10 @@
   			<div class='logo-wrapper' @click="toggleList">
   				<div class='logo'>购物车</div>
   			</div>
-  			<div class='t-price'>{{total}}</div>
+  			<div class='t-price'>$ {{total}}</div>
   		</div>
   		<div class='content-right'>
-  			<router-link to="/checkin">去结算</router-link>
+  			<router-link :to="{path: '/checkin',query: {foods: selectFoods, totalPrice: total}}" :selectFoods="selectFoods" :seller="seller">去结算</router-link>
   		</div>
   		<div class="shopcart-list" v-show="listShow" transition="fold">
   			<div class="list-header">
@@ -18,12 +18,12 @@
   			</div>
   			<div class="list-content">
   				<el-menu>
-  					<el-menu-item class="food" v-for="food in selectFoods">
-  						<span class="name">{{food.text}}</span>
-  						<div class="price">
-  							<span>{{food.cost*food.count}}</span>
+  					<el-menu-item class="food2" v-for="food in selectFoods">
+  						<span class="name2">{{food.dish_name}}</span>
+  						<div class="price2">
+  							<span>{{food.price*food.count}}</span>
   						</div>
-  						<div class="cc-wrapper">
+  						<div class="cc-wrapper2">
   							<cartcontrol :food="food"></cartcontrol>
   						</div>
   					</el-menu-item>
@@ -41,37 +41,21 @@ import cartcontrol from './cartcontrol'
 
 export default {
   name: 'shopcart',
-  props: ["selectFoods"],
+  props: ["foods", "seller"],
   data() {
   	return {
-  		selectFoods: selectFoods,
+  		selectFoods: ['test'],
   	  	fold: false,
   	  	total: 0
   	  }
   },
-  // props: {
-  // 	selectFoods: {
-  // 		type: Array,
-  // 		default() {
-  // 			return [
-	 //  			{text: '青椒肉丝', cost: 10, count: 0},
-		//         {text: '小鸡炖蘑菇', cost: 10, count: 0},
-		//         {text: '家常豆腐', cost: 10, count: 0},
-		//         {text: '酸辣土豆丝', cost: 10, count: 0},
-		//         {text: '干炒牛河', cost: 10, count: 0},
-		//         {text: '红烧狮子头', cost: 10, count: 0},
-		//         {text: '蒜蓉生菜', cost: 10, count: 0},
-		//         {text: '香辣小龙虾', cost: 10, count: 0}
-  // 			];
-  // 		}
-  // 	}
-  // },
   computed: {
   	totalPrice() {
   		let total = 0;
-  		this.selectFoods.forEach(() => {
+  		this.selectFoods.forEach((food) => {
   			total += food.price * food.count;
-  		})
+  		});
+  		return total;
   	},
   	listShow() {
   		return this.fold;
@@ -82,7 +66,17 @@ export default {
   },
   methods: {
   	toggleList() {
-  		console.log("test");
+  		this.selectFoods = [];
+  		for (var item of this.foods) {
+           if (item.select == true) {
+           	  this.selectFoods = this.selectFoods.concat(item);
+           }
+        }
+    //     console.log('selectFoods');
+  		// console.log(this.selectFoods);
+  		// console.log('this.totalPrice')
+  		// console.log(this.totalPrice);
+  		this.total = this.totalPrice;
   		this.fold = !this.fold;
   	}
   }
@@ -153,7 +147,22 @@ export default {
 	z-index: 40;
 	background-color: gray;
 }
-.food {
-	height: 40px;
+.food2 {
+	height: 60px;
+}
+.name2 {
+  position: absolute;
+}
+.price2 {
+  position: absolute;
+  left: 100px;
+}
+.cc-wrapper2 {
+  position: absolute;
+  /*background-color: black;*/
+  height: 50px;
+  width: 90px;
+  right: 0;
+  /*top: -40px;*/
 }
 </style>

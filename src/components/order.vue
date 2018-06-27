@@ -2,68 +2,78 @@
   <div class='goods'>
     <div class='left-menu'>
       <el-menu>
-        <el-menu-item v-for='item in items'>
-          <span>{{item.text}}</span>
+        <el-menu-item v-for='item in categoriesArr'>
+          <span>{{item.category_name}}</span>
         </el-menu-item>
       </el-menu>
     </div>
     <div class='right-menu'>
       <el-menu>
-        <el-menu-item v-for='item in menu' class='food-item'>
+        <el-menu-item v-for='item in dishesArr' class='food-item'>
           <div class='icon'></div>
-          <div class='m-name'>{{item.text}}</div>
-          <div class='price'>$ {{item.cost}}</div>
-          <div class='num'>月销量: {{item.num}}</div>
+          <div class='m-name'>{{item.dish_name}}</div>
+          <div class='price'>$ {{item.price}}</div>
+          <!-- <div class='num'>月销量: {{item.num}}</div> -->
           <div class='cc-wrapper'>
             <cartcontrol :food="item"></cartcontrol>
           </div>
         </el-menu-item>
       </el-menu>
     </div>
-    <shopcart :selectFoods="selectFoods"></shopcart>
+    <!-- <div class='showSth' @click='showSelect'>showSomething</div> -->
+    <shopcart :foods="dishesArr" :seller='seller'></shopcart>
   </div>
 </template>
 
 <script>
 import shopcart from './shopcart'
 import cartcontrol from './cartcontrol'
+var axios = require('axios');
 
 export default {
   name: 'order',
   data () {
     return {
-      items: [
-        {text: '热销菜品'},
-        {text: '香爆热炒'},
-        {text: '麻辣凉拌'},
-        {text: '热汤'},
-        {text: '主食'}
-      ],
-      menu: [
-        {text: '青椒肉丝', cost: 10, count: 0},
-        {text: '小鸡炖蘑菇', cost: 10, count: 0},
-        {text: '家常豆腐', cost: 10, count: 0},
-        {text: '酸辣土豆丝', cost: 10, count: 0},
-        {text: '干炒牛河', cost: 10, count: 0},
-        {text: '红烧狮子头', cost: 10, count: 0},
-        {text: '蒜蓉生菜', cost: 10, count: 0},
-        {text: '香辣小龙虾', cost: 10, count: 0}
-      ],
-      selectFoods: [
-        {text: '小鸡炖蘑菇', cost: 10, count: 0},
-        {text: '家常豆腐', cost: 10, count: 0},
-        {text: '酸辣土豆丝', cost: 10, count: 0},
-        {text: '干炒牛河', cost: 10, count: 0},
-        {text: '红烧狮子头', cost: 10, count: 0},
-        {text: '蒜蓉生菜', cost: 10, count: 0},
-      ]
+      categoriesArr : [],
+      dishesArr : []
     }
   },
   components: {
     shopcart,
     cartcontrol
   },
-  props: {}
+  props: ['seller'],
+  //test
+  mounted () {
+      axios.get('/api/v1/menu', {
+          params: {
+            restaurant_id:this.seller.rid
+          }
+      }).then((response)=>{
+          var menu = response.data.data;
+          this.categoriesArr = menu;
+          for (var type of menu) {
+              this.dishesArr = this.dishesArr.concat(type.dishes)
+          }
+          // console.log('categoriesArr')
+          // console.log(this.categoriesArr)
+          // console.log('dishesArr')
+          // console.log(this.dishesArr)
+          for (var item of this.dishesArr) {
+            item.select = false;
+            item.count = 0;
+          }
+      // console.log('count')
+      // console.log(this.dishesArr[1].count)
+      }).catch((err) => {
+          console.log(err)
+      });
+  },
+  methods : {
+    showSelect() {
+        console.log(this.dishesArr[0].select)
+    }
+  }
   // computed: {
   //   selectFoods() {
   //     let foods = [];
@@ -98,7 +108,7 @@ export default {
 }
 .food-item {
   position: relative;
-  height: 130px;
+  height: 100px;
   border-color: black;
 }
 .icon {

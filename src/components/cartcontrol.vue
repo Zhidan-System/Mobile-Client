@@ -1,31 +1,42 @@
 <template>
   <div class="cartcontrol">
     <div class="cart-minus" @click="minus">-</div>
-    <div class="cart-count">{{food.count}}</div>
+    <div class="cart-count">{{message}}</div>
     <div class="cart-add" @click="add">+</div>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 
 export default {
   name: 'cartcontrol',
-  props: {
-  	food:{
-      count: 0
-    }
-  },
+  props: ['food'],
   created() {
-    console.log('cartcontrol-test: ')
+    // console.log('cartcontrol-test: ')
   },
   methods: {
     add() {
       this.food.count++;
-      console.log("add one item");
+      this.food.select = true;
+      // console.log("add one item");
+      // console.log(this.food.dish_name);
+      // console.log(this.food.count);
+      this.message = this.food.count;
     },
     minus() {
-      if (this.food.count > 0)
+      if (this.food.count > 0) {
         this.food.count--;
+      }
+      if (this.food.count < 1) {
+        this.food.select = false;
+      }
+      this.message = this.food.count;
+    }
+  },
+  data() {
+    return {
+        message : 0
     }
   }
 }

@@ -3,50 +3,61 @@
     <div class="header">订单详情</div>
     <div class="list-content">
   		<el-menu>
-  			<li class="food" v-for="food in foods.selectFoods">
-  				<div class="checkname">{{food.text}}</div>
-  				<div class="checkcost">${{food.cost}}</div>
-  				<div class="cc-wrapper">
-  					<cartcontrol></cartcontrol>
-  				</div>
+  			<li class="food" v-for="food in selectFoods">
+  				<div class="checkname">{{food.dish_name}}</div>
+  				<div class="checkcost">${{food.price}}</div>
   			</li>
   		</el-menu>
   	</div>
   	<div class="blank"></div>
   	<div class="free">优惠</div>
   	<div class="bottom">
-  		<div class="totalPrice"></div>
+  		<div class="totalPrice">$ {{total}}</div>
   		<router-link to='/confirm'>确认订单</router-link>
-  		<router-link to='/order'>返回</router-link>
   	</div>
-  	<router-link to='/order'>返回</router-link>
+  	<router-link to='/'>返回</router-link>
   </div>
 </template>
 
 <script>
 import cartcontrol from './cartcontrol'
-
+var axios = require('axios');
 
 export default {
   name: 'checkin',
-  // props: ['selectFoods'],
   data() {
   	return {
-  		text: "data测试",
-  		foods: {
-  			selectFoods: [
-		        {text: '小鸡炖蘑菇', cost: 10, count: 0},
-		        {text: '家常豆腐', cost: 10, count: 0},
-		        {text: '酸辣土豆丝', cost: 10, count: 0},
-		        {text: '干炒牛河', cost: 10, count: 0},
-		        {text: '红烧狮子头', cost: 10, count: 0},
-		        {text: '蒜蓉生菜', cost: 10, count: 0},
-	        ]
+  		selectFoods : this.$route.query.foods,
+  		total : this.$route.query.totalPrice,
+  		postData : {
+  			restaurant_id : this.seller.rid,
+	  		total_price : this.total,
+	  		desk_id : this.seller.did,
+	  		tableware : "否",
+	  		dish_list : this.selectFoods
   		}
   	}
   },
   components: {
   	cartcontrol
+  },
+  props: ['seller'],
+  mounted() {
+  		// alert('test')
+  		this.postData.restaurant_id = this.seller.rid;
+  		this.postData.total_price = this.total;
+  		this.postData.desk_id = this.seller.did;
+  		this.postData.tableware = "否";
+  		this.postData.dish_list = this.selectFoods;
+  		console.log('this.postData3: ')
+  		console.log(this.postData)
+  		axios.post('/api/v1/order', this.postData).then((response)=>{
+  			console.log('post success')
+  			console.log(response)
+  		}).catch((err)=>{
+  			console.log('post failed')
+  			console.log(err)
+  		});
   }
 }
 </script>

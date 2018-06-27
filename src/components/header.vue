@@ -6,7 +6,8 @@
     	</div>
     	<div class='content'>
     		<div class='name'>{{seller.name}}</div>
-    		<div class='time'>{{seller.time}}</div>
+    		<!-- <div class='time'>{{seller.time}}</div> -->
+    		<div class='id'>餐厅号: {{seller.rid}}</div>
     	</div>
     </div>
   </div>
@@ -16,11 +17,9 @@
 
 export default {
   name: 'header',
-  props: {
-  	seller: {
-  		name: '那里特色川菜',
-  		time: '营业时间:10:00-18:00'
-  	}
+  props: ['seller'],
+  mounted() {
+  	// alert(this.seller.id)
   }
 }
 </script>

@@ -8,12 +8,19 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {path: '/', redirect: '/order'},
-    {path: '/order', component: order},
+    {path: '/', redirect: '/desk/1/restaurant/1'},
     {
-    	path: '/checkin', 
-    	component: checkin
+    	path: '/desk/:did/restaurant/:rid',
+    	component: order
+    	// ,
+    	// children:[
+    	// 	{path: '/desk/:did/restaurant/:rid/checkin', component: checkin}
+    	// ]
     },
-    {path: '/confirm', component: confirm}
+    {
+    	path: '/checkin',
+    	component: checkin
+    }
+    // {path: '/confirm', component: confirm}
   ]
 })
