@@ -1,8 +1,14 @@
 <template>
   <div class="cartcontrol">
-    <div class="cart-minus" @click="minus">-</div>
+<!--     <div class="cart-minus" @click="minus">-</div>
     <div class="cart-count">{{message}}</div>
-    <div class="cart-add" @click="add">+</div>
+    <div class="cart-add" @click="add">+</div> -->
+    <!-- <el-input-number class="cart-count2" v-model="num1" @change="handleChange" :min="0" :max="9" label="描述文字" size="mini"></el-input-number> -->
+    <el-button class="b-minus" @click="minus" size="mini" circle></el-button>
+    <span class='minus'>-</span>
+    <span class="number">{{num1}}</span>
+    <el-button class="b-plus" @click="add" size="mini" circle></el-button>
+    <span class="plus">+</span>
   </div>
 </template>
 
@@ -14,29 +20,41 @@ export default {
   props: ['food'],
   created() {
     // console.log('cartcontrol-test: ')
+    num1 : this.food.count;
+  },
+  mounted() {
+    // this.food.count = this.num1;
+    num1 : this.food.count;
   },
   methods: {
-    add() {
-      this.food.count++;
-      this.food.select = true;
-      // console.log("add one item");
-      // console.log(this.food.dish_name);
-      // console.log(this.food.count);
-      this.message = this.food.count;
-    },
-    minus() {
-      if (this.food.count > 0) {
-        this.food.count--;
-      }
-      if (this.food.count < 1) {
-        this.food.select = false;
-      }
-      this.message = this.food.count;
-    }
+      // handleChange() {
+      //     this.food.count = this.num1;
+      //     this.food.select = true;
+      //     if (this.food.count == 0) {
+      //         this.food.select = false;
+      //     }
+      //     console.log('handleChange')
+      // },
+      add() {
+        this.food.count++;
+        console.log("add one item");
+        this.food.select = true;
+        this.num1 = this.food.count;
+     },
+     minus() {
+       if (this.food.count > 0) {
+          this.food.count--;
+       }
+       if (this.food.count < 1) {
+         this.food.select = false;
+       }
+       this.num1 = this.food.count;
+     }
   },
   data() {
     return {
-        message : 0
+        num1 : this.food.count,
+        // flag : false
     }
   }
 }
@@ -44,25 +62,39 @@ export default {
 
 <style>
 .cartcontrol {
+  position: relative;
+  width: 80px;
+  height: 50px;
+  top: 15px;
 }
-.cart-minus {
+.minus {
   /*background-color: red;*/
   position: absolute;
-  height: 50px;
-  width: 30px;
+  left: 19px;
+  /*top: -15px;*/
+  z-index: 10;
+  /*left: px;*/
 }
-.cart-count {
-  /*background: black;*/
+.b-minus {
   position: absolute;
-  height: 50px;
-  width: 30px;
-  left: 30px;
+  left: 10px;
+  z-index: 9;
 }
-.cart-add {
-  /*background: blue;*/
+.number {
   position: absolute;
-  height: 50px;
-  width: 30px;
-  left: 60px;
+  left: 40px;
+  /*top: -15px;*/
+}
+.plus {
+  position: absolute;
+  left: 61px;
+  /*top: -15px;*/
+  z-index: 10;
+  /*left: 20px;*/
+}
+.b-plus {
+  position: absolute;
+  left: 52px;
+  z-index: 9;
 }
 </style>

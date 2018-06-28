@@ -1,18 +1,19 @@
 <template>
   <div>
-    <v-header :seller='seller'></v-header>
+    <v-header1 :seller='seller'></v-header1>
     <router-view :seller='seller'></router-view>
   </div>
 </template>
 
 <script>
-import header from './components/header'
+import header1 from './components/header1'
 import order from './components/order'
+var axios = require('axios');
 
 export default {
   name: 'App',
   components: {
-    'v-header': header,
+    'v-header1': header1,
     order
   },
   data() {
@@ -20,14 +21,28 @@ export default {
       //商家信息
       seller: {
         name: '那里特色川菜',
-        time: '营业时间:10:00-18:00',
+        rtime: '营业时间:10:00-18:00',
         rid: this.$route.params.rid,
-        did: this.$route.params.did
+        did: this.$route.params.did,
+        img: ""
       }
     };
   },
   mounted() {
-    // alert(this.seller.did)
+    axios.get('/api/v1/restaurant', {
+        params: {
+            restaurant_id: 1
+        }
+    }).then((response)=>{
+        console.log('get success');
+        console.log(response.data.data);
+        var data = response.data.data;
+        this.seller.img = data.image_url;
+        this.seller.rtime = data.date;
+    }).catch((err)=> {
+        console.log('get err');
+        console.log(err);
+    })
   }
 }
 </script>

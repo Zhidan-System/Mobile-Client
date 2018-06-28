@@ -17,10 +17,7 @@ export default new Router({
     	// 	{path: '/desk/:did/restaurant/:rid/checkin', component: checkin}
     	// ]
     },
-    {
-    	path: '/checkin',
-    	component: checkin
-    }
-    // {path: '/confirm', component: confirm}
+    {path: '/checkin',component: checkin},
+    {path: '/confirm', component: confirm}
   ]
 })

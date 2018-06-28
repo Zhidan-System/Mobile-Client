@@ -14,6 +14,10 @@ module.exports = {
         '/api/v1': {
         target: 'http://zhidan.site:8080',
         changeOrigin: true
+      },
+      '/img': {
+        target: "http://zhidan.site:8080",
+        changeOrigin: true
       }
     },
 
