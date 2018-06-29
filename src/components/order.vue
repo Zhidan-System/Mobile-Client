@@ -94,7 +94,7 @@ export default {
   display: flex;
   position:  absolute;
   top: 109px;
-  height: 500px;
+  height: 400px;
   /*bottom: 46px;*/
   width: 100%;
   overflow: hidden;
