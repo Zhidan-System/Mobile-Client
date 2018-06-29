@@ -107,7 +107,7 @@ export default {
 	height: 60px;
 	width: 100%;
 	bottom: 0;
-	/*z-index: 50px;*/
+	z-index: 50;
 }
 .shopcart {
 	position: absolute;
