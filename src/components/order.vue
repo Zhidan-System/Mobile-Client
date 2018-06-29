@@ -203,12 +203,14 @@ export default {
 .catgTitle {
   /*position: absolute;*/
   background-color: #f3f5f7;
+  width: 375px;
 }
 .catgTitle {
   /*position: absolute;*/
   font-size: 15px;
 }
 .current {
-    background-color: #f3f5f7;
+    /*background-color: #f3f5f7;*/
+    background-color: #D0D0CD;
 }
 </style>
