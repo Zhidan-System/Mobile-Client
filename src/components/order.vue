@@ -94,19 +94,20 @@ export default {
   display: flex;
   position:  absolute;
   top: 109px;
-  height: 460px;
+  height: 470px;
   /*bottom: 46px;*/
   width: 100%;
   overflow: hidden;
 }
 .left-menu {
   flex: 0 0 80px;
-  width: 115px;
+  width: 100px;
   height: 530px;
   background-color: #f3f5f7;
 }
 .right-menu {
   height: 530px;
+  width: 275px;
   flex: 1;
   overflow: hidden;
 }

@@ -4,11 +4,11 @@
     <div class="cart-count">{{message}}</div>
     <div class="cart-add" @click="add">+</div> -->
     <!-- <el-input-number class="cart-count2" v-model="num1" @change="handleChange" :min="0" :max="9" label="描述文字" size="mini"></el-input-number> -->
-    <el-button class="b-minus" @click="minus" size="mini" circle></el-button>
-    <span class='minus'>-</span>
+    <el-button class="b-minus" @click="minus" size="mini" circle>-</el-button>
+    <!-- <span class='minus'>-</span> -->
     <span class="number">{{num1}}</span>
-    <el-button class="b-plus" @click="add" size="mini" circle></el-button>
-    <span class="plus">+</span>
+    <el-button class="b-plus" @click="add" size="mini" circle>+</el-button>
+    <!-- <span class="plus">+</span> -->
   </div>
 </template>
 
