@@ -156,6 +156,7 @@ export default {
 .food-item {
   position: relative;
   height: 100px;
+  width: 275px;
   border-top: 1px solid silver;
   box-shadow: 2px 2px 1px #888888;
 }

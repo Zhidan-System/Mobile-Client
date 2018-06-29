@@ -1,5 +1,6 @@
 <template>
   <div class="total">
+  	<div class="paySuccess">支付成功</div>
     <div class="totalText">总价: {{total}}</div>
   </div>
 </template>
@@ -30,8 +31,22 @@ export default {
 
 <style>
 .total {
+	top: 430px;
+	position: relative;
     width: 375px;
     height: 40px;
     border: 1px solid silver;
+}
+.paySuccess {
+	position: absolute;
+	left: 20px;
+	top: 5px;
+	font-size: 20px;
+}
+.totalText {
+	position: absolute;
+	right: 20px;
+	top: 5px;
+	font-size: 20px;
 }
 </style>
