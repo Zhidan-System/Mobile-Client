@@ -203,7 +203,7 @@ export default {
 .catgTitle {
   /*position: absolute;*/
   background-color: #f3f5f7;
-  width: 375px;
+  width: 275px;
 }
 .catgTitle {
   /*position: absolute;*/
