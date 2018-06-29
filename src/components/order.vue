@@ -2,22 +2,28 @@
   <div class='goods'>
     <div class='left-menu' ref="menuWrapper">
       <el-menu>
-        <el-menu-item index="" class="left_menu" v-for='item in categoriesArr'>
+        <el-menu-item index="" class="left_menu" :class="{'current':currentIndex===index}" v-for='(item,index) in categoriesArr'>
           <span>{{item.category_name}}</span>
         </el-menu-item>
       </el-menu>
     </div>
     <div class='right-menu' ref="foodWrapper">
       <el-menu>
-        <li index="" v-for='item in dishesArr' class='food-item'>
-          <img :src="item.image_url" class='img'>
-          <div class='m-name'>{{item.dish_name}}</div>
-          <div class='price'>$ {{item.price}}</div>
-          <!-- <div class='num'>月销量: {{item.num}}</div> -->
-          <div class='cc-wrapper'>
-            <cartcontrol :food="item"></cartcontrol>
-          </div>
-        </li>
+        <li index="" v-for="bigItem in categoriesArr" class="catgHead catg-hook">
+            <div class="catgTitle">
+              <div class="catName">{{bigItem.category_name}}</div>
+            </div>
+            <el-menu>
+              <li index="" v-for='item in bigItem.dishes' class='food-item'>
+                <img :src="item.image_url" class='img'>
+                <div class='m-name'>{{item.dish_name}}</div>
+                <div class='price'>$ {{item.price}}</div>
+                <div class='cc-wrapper'>
+                  <cartcontrol :food="item"></cartcontrol>
+                </div>
+              </li>
+            </el-menu>
+         </li> 
       </el-menu>
     </div>
     <!-- <div class='showSth' @click='showSelect'>showSomething</div> -->
@@ -36,7 +42,9 @@ export default {
   data () {
     return {
       categoriesArr: [],
-      dishesArr: []
+      dishesArr: [],
+      listHeight: [],
+      scrollY: 0
     }
   },
   components: {
@@ -45,9 +53,6 @@ export default {
   },
   props: ['seller'],
   created () {
-      this.$nextTick(() => {
-          this._initScroll()
-      })
   },
   mounted () {
       axios.get('/api/v1/menu', {
@@ -57,6 +62,8 @@ export default {
       }).then((response) => {
           var menu = response.data.data;
           this.categoriesArr = menu;
+          console.log('this.categoriesArr')
+          console.log(this.categoriesArr)
           for (var type of menu) {
               this.dishesArr = this.dishesArr.concat(type.dishes)
           }
@@ -65,9 +72,25 @@ export default {
             item.select = false;
             item.count = 0;
           }
+          this.$nextTick(() => {
+            this._initScroll();
+            this._calculateHeight();
+          })
       }).catch((err) => {
           console.log(err)
       })
+  },
+  computed: {
+      currentIndex() {
+        for (var i=0; i<this.listHeight.length;i++) {
+          var height1 = this.listHeight[i];
+          var height2 = this.listHeight[i+1];
+          if (!height2 || (this.scrollY>height1 && this.scrollY<height2)) {
+              return i;
+          }
+        }
+        return 0;
+      }
   },
   methods: {
     showSelect () {
@@ -75,7 +98,26 @@ export default {
     },
     _initScroll () {
       this.menuScroll = new BScroll(this.$refs.menuWrapper, {})
-      this.foodScroll = new BScroll(this.$refs.foodWrapper, {})
+
+      this.foodScroll = new BScroll(this.$refs.foodWrapper, {
+          probeType: 3
+      })
+
+      this.foodScroll.on('scroll',(pos) => {
+          this.scrollY = Math.abs(Math.round(pos.y));
+      });
+    },
+    _calculateHeight() {
+      var foodList = this.$refs.foodWrapper.getElementsByClassName('catg-hook');
+      var height = 0;
+      this.listHeight.push(height);
+      for (var i=0; i < foodList.length; i++) {
+        var item = foodList[i];
+        height += item.clientHeight;
+        this.listHeight.push(height);
+      }
+      console.log('this.listHeight')
+      console.log(this.listHeight)
     }
   }
   // computed: {
@@ -156,5 +198,16 @@ export default {
 }
 .left_menu {
   border-top: 1px solid silver;
+}
+.catgTitle {
+  /*position: absolute;*/
+  background-color: #f3f5f7;
+}
+.catgTitle {
+  /*position: absolute;*/
+  font-size: 15px;
+}
+.current {
+    background-color: #f3f5f7;
 }
 </style>

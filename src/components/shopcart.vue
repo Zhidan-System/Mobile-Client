@@ -3,7 +3,7 @@
   <div class='shopcart'>
   	<div class='content'>
   		<div class='content-left'>
-  			<div class='logo-wrapper' @click="toggleList();clickLogo()">
+  			<div class='logo-wrapper' @click="toggleList ();clickLogo ()">
   				<div class='logo'>购物车</div>
   			</div>
   			<div class='t-price'>$ {{total}}</div>
@@ -46,7 +46,7 @@ import cartcontrol from './cartcontrol'
 export default {
   name: 'shopcart',
   props: ["foods", "seller"],
-  data() {
+  data () {
   	return {
   		selectFoods: [],
   	  	fold: false,
@@ -54,14 +54,14 @@ export default {
   	  }
   },
   computed: {
-  	totalPrice() {
+  	totalPrice () {
   		let total = 0;
   		this.selectFoods.forEach((food) => {
   			total += food.price * food.count;
   		});
   		return total;
   	},
-  	listShow() {
+  	listShow () {
   		return this.fold;
   	}
   },
@@ -69,7 +69,7 @@ export default {
   	cartcontrol
   },
   methods: {
-  	toggleList() {
+  	toggleList () {
   		this.selectFoods = [];
   		for (var item of this.foods) {
            if (item.select == true) {
@@ -81,13 +81,13 @@ export default {
   		console.log('this.selectFoods')
   		console.log(this.selectFoods)
   	},
-  	clickLogo() {
+  	clickLogo () {
   		console.log('clickLogo')
   	},
-  	clearList() {
+  	clearList () {
   		this.selectFoods = []
   	}
-  	// computeTotal() {
+  	// computeTotal () {
   	// 	this.selectFoods = [];
   	// 	for (var item of this.foods) {
    //         if (item.select == true) {
@@ -162,11 +162,11 @@ export default {
 .shopcart-list {
 	position: absolute;
 	background-color: white;
-	height: 510px;
+	height: 400px;
 	bottom: 60px;
 	left: 0;
 	z-index: -1;
-	width: 100%;
+	width: 375px;
 	overflow: hidden;
 }
 .list-header {
