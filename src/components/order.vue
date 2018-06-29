@@ -94,7 +94,7 @@ export default {
   display: flex;
   position:  absolute;
   top: 109px;
-  height: 400px;
+  height: 460px;
   /*bottom: 46px;*/
   width: 100%;
   overflow: hidden;
@@ -144,7 +144,7 @@ export default {
   /*background-color: black;*/
   height: 50px;
   width: 90px;
-  right: 0;
+  right: 30px;
   top: 50px;
 }
 .img {
