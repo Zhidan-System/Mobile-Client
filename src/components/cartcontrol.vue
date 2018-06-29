@@ -4,10 +4,12 @@
     <div class="cart-count">{{message}}</div>
     <div class="cart-add" @click="add">+</div> -->
     <!-- <el-input-number class="cart-count2" v-model="num1" @change="handleChange" :min="0" :max="9" label="描述文字" size="mini"></el-input-number> -->
-    <el-button class="b-minus" @click="minus" size="mini" circle>-</el-button>
+    <!-- <el-button class="b-minus" @click="minus" size="medium" circle></el-button> -->
+    <button class="b-minus" @click="minus">-</button>
     <!-- <span class='minus'>-</span> -->
     <span class="number">{{num1}}</span>
-    <el-button class="b-plus" @click="add" size="mini" circle>+</el-button>
+    <button class="b-plus" @click="add">+</button>
+    <!-- <el-button class="b-plus" @click="add" size="medium" circle></el-button> -->
     <!-- <span class="plus">+</span> -->
   </div>
 </template>
@@ -79,11 +81,16 @@ export default {
   position: absolute;
   left: 10px;
   z-index: 9;
+  background: white;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  font-size: 20px;
 }
 .number {
   position: absolute;
-  left: 40px;
-  /*top: -15px;*/
+  left: 43px;
+  top: 3px;
 }
 .plus {
   position: absolute;
@@ -94,7 +101,12 @@ export default {
 }
 .b-plus {
   position: absolute;
-  left: 52px;
+  left: 56px;
   z-index: 9;
+  background-color: white;
+  height: 30px;
+  width: 30px;
+  border-radius: 15px;
+  font-size: 20px;
 }
 </style>
