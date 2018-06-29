@@ -30,7 +30,7 @@ var axios = require('axios');
 
 export default {
   name: 'checkin',
-  data() {
+  data () {
       return {
       selectFoods : this.$route.query.foods,
       total : this.$route.query.totalPrice,
@@ -47,7 +47,7 @@ export default {
       cartcontrol
   },
   props: ['seller'],
-  mounted() {
+  mounted () {
       // alert('test')
       this.postData.restaurant_id = this.seller.rid;
       this.postData.total_price = this.total;
@@ -70,7 +70,7 @@ export default {
 <style>
 .checkIn {
     position: relative;
-    height: 580px;
+    height: 560px;
     width: 375px;
 }
 .c_header {
