@@ -68,7 +68,7 @@ export default {
   width: 80px;
   height: 50px;
   top: 15px;
-  left: -20px;
+  left: -40px;
 }
 .minus {
   /*background-color: red;*/

@@ -20,7 +20,7 @@ export default {
     return {
       //商家信息
       seller: {
-        name: '那里特色川菜',
+        name: 'XX餐馆',
         rtime: '营业时间:10:00-18:00',
         rid: this.$route.params.rid,
         did: this.$route.params.did,

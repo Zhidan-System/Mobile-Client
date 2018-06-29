@@ -188,7 +188,7 @@ export default {
   /*background-color: black;*/
   height: 50px;
   width: 90px;
-  right: 30px;
+  right: 0px;
   top: 50px;
 }
 .img {
