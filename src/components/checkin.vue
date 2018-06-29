@@ -70,7 +70,7 @@ export default {
 <style>
 .checkIn {
     position: relative;
-    height: 560px;
+    height: 500px;
     width: 375px;
 }
 .c_header {
