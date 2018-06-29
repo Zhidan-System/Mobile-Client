@@ -29,14 +29,14 @@
 import shopcart from './shopcart'
 import cartcontrol from './cartcontrol'
 import BScroll from 'better-scroll'
-var axios = require('axios');
+var axios = require('axios')
 
 export default {
   name: 'order',
   data () {
     return {
-      categoriesArr : [],
-      dishesArr : []
+      categoriesArr: [],
+      dishesArr: []
     }
   },
   components: {
@@ -44,18 +44,17 @@ export default {
     cartcontrol
   },
   props: ['seller'],
-  //test
-  created() {
-      this.$nextTick(()=>{
-          this._initScroll();
-      });
+  created () {
+      this.$nextTick(() => {
+          this._initScroll()
+      })
   },
   mounted () {
       axios.get('/api/v1/menu', {
           params: {
             restaurant_id:this.seller.rid
           }
-      }).then((response)=>{
+      }).then((response) => {
           var menu = response.data.data;
           this.categoriesArr = menu;
           for (var type of menu) {
@@ -68,13 +67,13 @@ export default {
           }
       }).catch((err) => {
           console.log(err)
-      });
+      })
   },
-  methods : {
-    showSelect() {
-        console.log(this.dishesArr[0].select)
+  methods: {
+    showSelect () {
+      console.log(this.dishesArr[0].select)
     },
-    _initScroll() {
+    _initScroll () {
       this.menuScroll = new BScroll(this.$refs.menuWrapper, {})
       this.foodScroll = new BScroll(this.$refs.foodWrapper, {})
     }

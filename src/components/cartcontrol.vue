@@ -18,16 +18,16 @@ import Vue from 'vue'
 export default {
   name: 'cartcontrol',
   props: ['food'],
-  created() {
+  created () {
     // console.log('cartcontrol-test: ')
     num1 : this.food.count;
   },
-  mounted() {
+  mounted () {
     // this.food.count = this.num1;
     num1 : this.food.count;
   },
   methods: {
-      // handleChange() {
+      // handleChange () {
       //     this.food.count = this.num1;
       //     this.food.select = true;
       //     if (this.food.count == 0) {
@@ -35,13 +35,13 @@ export default {
       //     }
       //     console.log('handleChange')
       // },
-      add() {
+      add () {
         this.food.count++;
         console.log("add one item");
         this.food.select = true;
         this.num1 = this.food.count;
      },
-     minus() {
+     minus () {
        if (this.food.count > 0) {
           this.food.count--;
        }
@@ -51,7 +51,7 @@ export default {
        this.num1 = this.food.count;
      }
   },
-  data() {
+  data () {
     return {
         num1 : this.food.count,
         // flag : false

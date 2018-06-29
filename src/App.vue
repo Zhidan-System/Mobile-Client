@@ -8,7 +8,7 @@
 <script>
 import header1 from './components/header1'
 import order from './components/order'
-var axios = require('axios');
+var axios = require('axios')
 
 export default {
   name: 'App',
@@ -16,7 +16,7 @@ export default {
     'v-header1': header1,
     order
   },
-  data() {
+  data () {
     return {
       //商家信息
       seller: {
@@ -28,20 +28,20 @@ export default {
       }
     };
   },
-  mounted() {
+  mounted () {
     axios.get('/api/v1/restaurant', {
         params: {
             restaurant_id: 1
         }
-    }).then((response)=>{
-        console.log('get success');
-        console.log(response.data.data);
+    }).then((response) => {
+        console.log('get success')
+        console.log(response.data.data)
         var data = response.data.data;
         this.seller.img = data.image_url;
         this.seller.rtime = data.date;
-    }).catch((err)=> {
-        console.log('get err');
-        console.log(err);
+    }).catch((err) => {
+        console.log('get err')
+        console.log(err)
     })
   }
 }
