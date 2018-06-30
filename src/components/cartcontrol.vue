@@ -7,7 +7,7 @@
     <!-- <el-button class="b-minus" @click="minus" size="medium" circle></el-button> -->
     <button class="b-minus" @click="minus">-</button>
     <!-- <span class='minus'>-</span> -->
-    <span class="number">{{num1}}</span>
+    <span class="number">数量: {{num1}}</span>
     <button class="b-plus" @click="add">+</button>
     <!-- <el-button class="b-plus" @click="add" size="medium" circle></el-button> -->
     <!-- <span class="plus">+</span> -->
@@ -96,8 +96,9 @@ export default {
 }
 .number {
   position: absolute;
+  width: 100px;
   left: 43px;
-  top: 3px;
+  top: -45px;
 }
 .plus {
   position: absolute;
