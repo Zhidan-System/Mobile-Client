@@ -85,7 +85,11 @@ export default {
   		console.log('clickLogo')
   	},
   	clearList () {
-  		this.selectFoods = []
+  		this.selectFoods = [];
+  		for (var item of this.foods) {
+  			item.count = 0;
+  			item.select = false;
+  		}
   	}
   	// computeTotal () {
   	// 	this.selectFoods = [];

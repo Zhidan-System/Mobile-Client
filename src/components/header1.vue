@@ -6,7 +6,7 @@
         </div>
         <div class='headerContent'>
             <img :src="seller.img" class="headImg">
-            <div class='headName'>{{seller.name}}</div>
+            <div class='headName'>{{seller.rname}}</div>
             <div class='headTime'>{{seller.rtime}}</div>
             <div class='headId'>餐厅号: {{seller.rid}}</div>
         </div>

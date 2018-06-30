@@ -20,7 +20,7 @@ export default {
     return {
       //商家信息
       seller: {
-        name: 'XX餐馆',
+        rname: 'XX餐馆',
         rtime: '营业时间:10:00-18:00',
         rid: this.$route.params.rid,
         did: this.$route.params.did,
@@ -39,6 +39,9 @@ export default {
         var data = response.data.data;
         this.seller.img = data.image_url;
         this.seller.rtime = data.date;
+        this.seller.rname = data.restaurant_name;
+        // console.log('this.seller.rname')
+        // console.log(this.seller.rname)
     }).catch((err) => {
         console.log('get err')
         console.log(err)

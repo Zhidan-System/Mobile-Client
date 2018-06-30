@@ -144,11 +144,11 @@ export default {
 .left-menu {
   flex: 0 0 80px;
   width: 100px;
-  height: 530px;
+  height: 430px;
   background-color: #f3f5f7;
 }
 .right-menu {
-  height: 530px;
+  height: 430px;
   width: 275px;
   flex: 1;
   overflow: hidden;
