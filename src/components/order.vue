@@ -1,6 +1,14 @@
 <template>
   <div class='goods'>
-    <div class="info" v-show="showInfo" @click="hideInfo">详细信息</div>
+    <div class="info" v-show="showInfo" @click="hideInfo">
+      <div>
+        <img :src="infoItem.image_url" class='info-img'>
+        <div class='info-name'>{{infoItem.dish_name}}</div>
+        <div class='info-price'>$ {{infoItem.price}}</div>
+        <div class="info-flavor">口味：{{infoItem.flavor}}</div>
+        <div class="infomation">详情介绍 : {{infoItem.description}}</div>
+      </div>
+    </div>
     <div class='left-menu' ref="menuWrapper">
       <el-menu>
         <el-menu-item index="" class="left_menu" :class="{'current':currentIndex===index}" v-for='(item,index) in categoriesArr'>
@@ -17,7 +25,7 @@
             <el-menu>
               <li index="" v-for='item in bigItem.dishes' class='food-item'>
                 <img :src="item.image_url" class='img'>
-                <div class='m-name' @click="clickInfo()">{{item.dish_name}}</div>
+                <div class='m-name' @click="clickInfo(item)">{{item.dish_name}}</div>
                 <div class='price'>$ {{item.price}}</div>
                 <div class='cc-wrapper'>
                   <cartcontrol :food="item"></cartcontrol>
@@ -47,7 +55,7 @@ export default {
       listHeight: [],
       scrollY: 0,
       fold: false,
-      curItem: []
+      infoItem: {}
     }
   },
   components: {
@@ -123,8 +131,10 @@ export default {
       console.log('this.listHeight')
       console.log(this.listHeight)
     },
-    clickInfo() {
+    clickInfo(item) {
       console.log("clickInfo")
+      console.log(item)
+      this.infoItem = item
       this.fold = true;
     },
     hideInfo() {
@@ -230,10 +240,21 @@ export default {
 .info {
   position: fixed;
   width: 200px;
-  height: 200px;
+  height: 300px;
   left: 100px;
   top: 200px;
-  background-color: yellow;
+  background-color: white;
   z-index: 100;
+  border: 4px solid silver;
+}
+.info-img {
+  position: relative;
+  left: 40px;
+  width: 120px;
+  height: 120px;
+}
+.info-flavor, .info-price, .info-name, .infomation {
+  position: relative;
+  left: 20px;
 }
 </style>

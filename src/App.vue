@@ -24,7 +24,8 @@ export default {
         rtime: '营业时间:10:00-18:00',
         rid: this.$route.params.rid,
         did: this.$route.params.did,
-        img: ""
+        img: "",
+        data: {}
       }
     };
   },
@@ -37,6 +38,7 @@ export default {
         console.log('get success')
         console.log(response.data.data)
         var data = response.data.data;
+        this.seller.data = data;
         this.seller.img = data.image_url;
         this.seller.rtime = data.date;
         this.seller.rname = data.restaurant_name;
