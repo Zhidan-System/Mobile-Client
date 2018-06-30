@@ -6,11 +6,11 @@
   			<div class='logo-wrapper' @click="toggleList ();clickLogo ()">
   				<div class='logo'>购物车</div>
   			</div>
-  			<div class='t-price'>$ {{total}}</div>
+  			<div class='t-price'>$ {{totalPrice}}</div>
   		</div>
   		<div class='content-right'>
   			<div class="goTo">
-  			<router-link :to="{path: '/checkin',query: {foods: selectFoods, totalPrice: total}}" :selectFoods="selectFoods" :seller="seller">去结算</router-link>
+  			<router-link :to="{path: '/checkin',query: {foods: foods, totalPrice: totalPrice}}" :selectFoods="foods" :seller="seller">去结算</router-link>
   		</div>
   		</div>
   		<div class="shopcart-list" v-show="listShow" transition="fold">
@@ -18,18 +18,18 @@
   				<div class="title-wrapper">
   					<div class="title">已选菜品</div>
   				</div>
-  				<el-button class="empty" type="warning" icon="el-icon-delete" @click="clearList" plain></el-button>
+<!--   				<el-button class="empty" type="warning" icon="el-icon-delete" @click="clearList" plain></el-button> -->
   			</div>
   			<div class="list-content" ref="listWrapper">
   				<el-menu>
-  					<li index="" class="food2" v-for="food in selectFoods">
+  					<li index="" class="food2" v-for="food in foods">
   						<span class="name2">{{food.dish_name}}</span>
   						<div class="price2">
   							<span>{{food.price}} x {{food.count}}</span>
   						</div>
-  						<div class="cc-wrapper2">
+<!--   						<div class="cc-wrapper2">
   							<cartcontrol :food="food" v-model="food.count"></cartcontrol>
-  						</div>
+  						</div> -->
   					</li>
   				</el-menu>
   			</div>
@@ -47,12 +47,9 @@ import BScroll from 'better-scroll'
 export default {
   name: 'shopcart',
   props: ["foods", "seller"],
-  model: {
-  	prop: 'foods'
-  },
   data () {
   	return {
-  		selectFoods: [],
+  		// selectFoods: [],
   	  	fold: false,
   	  	total: 0
   	  	// food: {}
@@ -66,7 +63,7 @@ export default {
   computed: {
   	totalPrice () {
   		let total = 0;
-  		this.selectFoods.forEach((food) => {
+  		this.foods.forEach((food) => {
   			total += food.price * food.count;
   		});
   		return total;
@@ -80,22 +77,22 @@ export default {
   },
   methods: {
   	toggleList () {
-  		this.selectFoods = [];
-  		for (var item of this.foods) {
-           if (item.select == true) {
-           	  this.selectFoods = this.selectFoods.concat(item);
-           }
-        }
-  		this.total = this.totalPrice;
+  		// this.selectFoods = [];
+  		// for (var item of this.foods) {
+    //        if (item.select == true) {
+    //        	  this.selectFoods = this.selectFoods.concat(item);
+    //        }
+    //     }
+  		// this.total = this.totalPrice;
   		this.fold = !this.fold;
-  		console.log('this.selectFoods')
-  		console.log(this.selectFoods)
+  		// console.log('this.selectFoods')
+  		// console.log(this.selectFoods)
   	},
   	clickLogo () {
   		console.log('clickLogo')
   	},
   	clearList () {
-  		this.selectFoods = [];
+  		// this.selectFoods = [];
   		for (var item of this.foods) {
   			item.count = 0;
   			item.select = false;

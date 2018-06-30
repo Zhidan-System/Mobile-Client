@@ -36,7 +36,7 @@
       </el-menu>
     </div>
     <!-- <div class='showSth' @click='showSelect'>showSomething</div> -->
-    <shopcart :foods="dishesArr" :seller='seller' v-model="dishesArr"></shopcart>
+    <shopcart :foods="selectFoods" :seller='seller'></shopcart>
   </div>
 </template>
 
@@ -55,7 +55,8 @@ export default {
       listHeight: [],
       scrollY: 0,
       fold: false,
-      infoItem: {}
+      infoItem: {},
+      test: 0
     }
   },
   components: {
@@ -102,6 +103,27 @@ export default {
       },
       showInfo() {
         return this.fold;
+      },
+      selectFoods() {
+        let foods = [];
+        var goods = this.categoriesArr;
+        // console.log('foods...')
+        // console.log(this.dishesArr)
+        // this.dishesArr.forEach((dish) => {
+        //     if (dish.select) {
+        //       foods.push(dish);
+        //     }
+        // });
+        var test1 = this.test;
+        goods.forEach((good) => {
+          good.dishes.forEach((food) => {
+            if (food.count) {
+              foods.push(food);
+            }
+          });
+        });
+        console.log(foods)
+        return foods;
       }
   },
   methods: {
@@ -109,9 +131,12 @@ export default {
       console.log(this.dishesArr[0].select)
     },
     _initScroll () {
-      this.menuScroll = new BScroll(this.$refs.menuWrapper, {})
+      this.menuScroll = new BScroll(this.$refs.menuWrapper, {
+        click: true
+      })
 
       this.foodScroll = new BScroll(this.$refs.foodWrapper, {
+          click: true,
           probeType: 3
       })
 
@@ -143,16 +168,12 @@ export default {
     },
     refreshCount() {
       console.log('refreshCount')
+      this.test++;
+      // console.log(this.selectFoods)
+      // console.log('this.dishesArr')
+      // console.log(this.dishesArr)
     }
   }
-  // computed: {
-  //   selectFoods() {
-  //     let foods = [];
-  //     this.goods.forEach((good) => {
-
-  //     });
-  //   }
-  // }
 }
 </script>
 
@@ -214,7 +235,7 @@ export default {
   /*background-color: black;*/
   height: 50px;
   width: 90px;
-  right: 0px;
+  right: -10px;
   top: 50px;
 }
 .img {

@@ -32,13 +32,19 @@ export default {
     num1 : this.food.count;
   },
   methods: {
-      add () {
+      add (event) {
+        // if (!event._constructed) {
+        //   return;
+        // }
         this.food.count++;
         console.log("add one item");
         this.food.select = true;
         this.num1 = this.food.count;
      },
-     minus () {
+     minus (event) {
+        // if (!event._constructed) {
+        //   return;
+        // }
        if (this.food.count > 0) {
           this.food.count--;
        }
@@ -68,7 +74,7 @@ export default {
   width: 80px;
   height: 50px;
   top: 15px;
-  left: -40px;
+  left: -50px;
 }
 .minus {
   /*background-color: red;*/
