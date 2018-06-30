@@ -55,8 +55,13 @@ export default {
   },
   data () {
     return {
-        num1 : this.food.count,
-        // flag : false
+        num1 : this.food.count
+    }
+  },
+  watch: {
+    num1(curValue, oldValue) {
+      console.log('curValue')
+      console.log (curValue)
     }
   }
 }

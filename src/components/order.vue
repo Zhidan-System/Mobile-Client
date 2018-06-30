@@ -1,5 +1,6 @@
 <template>
   <div class='goods'>
+    <div class="info" v-show="showInfo" @click="hideInfo">详细信息</div>
     <div class='left-menu' ref="menuWrapper">
       <el-menu>
         <el-menu-item index="" class="left_menu" :class="{'current':currentIndex===index}" v-for='(item,index) in categoriesArr'>
@@ -10,11 +11,11 @@
     <div class='right-menu' ref="foodWrapper">
       <el-menu>
         <li index="" v-for="bigItem in categoriesArr" class="catgHead catg-hook">
-            <div class="catgTitle">
+            <div class="catgTitle" @click="clickInfo()">
               <div class="catName">{{bigItem.category_name}}</div>
             </div>
             <el-menu>
-              <li index="" v-for='item in bigItem.dishes' class='food-item'>
+              <li index="" v-for='item in bigItem.dishes' class='food-item' @click="clickInfo()">
                 <img :src="item.image_url" class='img'>
                 <div class='m-name'>{{item.dish_name}}</div>
                 <div class='price'>$ {{item.price}}</div>
@@ -44,7 +45,9 @@ export default {
       categoriesArr: [],
       dishesArr: [],
       listHeight: [],
-      scrollY: 0
+      scrollY: 0,
+      fold: false,
+      curItem: []
     }
   },
   components: {
@@ -52,8 +55,6 @@ export default {
     cartcontrol
   },
   props: ['seller'],
-  created () {
-  },
   mounted () {
       axios.get('/api/v1/menu', {
           params: {
@@ -90,6 +91,9 @@ export default {
           }
         }
         return 0;
+      },
+      showInfo() {
+        return this.fold;
       }
   },
   methods: {
@@ -118,6 +122,14 @@ export default {
       }
       console.log('this.listHeight')
       console.log(this.listHeight)
+    },
+    clickInfo() {
+      console.log("clickInfo")
+      this.fold = true;
+    },
+    hideInfo() {
+      console.log('hideInfo')
+      this.fold = false;
     }
   }
   // computed: {
@@ -159,6 +171,7 @@ export default {
   width: 275px;
   border-top: 1px solid silver;
   box-shadow: 2px 2px 1px #888888;
+  z-index: 30;
 }
 .icon {
   position: absolute;
@@ -199,6 +212,7 @@ export default {
 }
 .left_menu {
   border-top: 1px solid silver;
+  width: 100px;
 }
 .catgTitle {
   /*position: absolute;*/
@@ -212,5 +226,14 @@ export default {
 .current {
     /*background-color: #f3f5f7;*/
     background-color: #D0D0CD;
+}
+.info {
+  position: fixed;
+  width: 200px;
+  height: 200px;
+  left: 100px;
+  top: 200px;
+  background-color: yellow;
+  z-index: 100;
 }
 </style>

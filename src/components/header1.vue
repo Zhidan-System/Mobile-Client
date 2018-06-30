@@ -1,5 +1,5 @@
 <template>
-  <div class='header1'>
+  <div class='header1' @click="clickHeadInfo()">
     <div class='content-wrapper'>
         <div class='avatar'>
             <!-- <img width='64' :src='seller.avatar'> -->
@@ -21,6 +21,11 @@ export default {
   props: ['seller'],
   mounted() {
       // alert(this.seller.id)
+  },
+  methods: {
+  	clickHeadInfo() {
+  		console.log('clickHeadInfo')
+  	}
   }
 }
 </script>
@@ -30,7 +35,7 @@ export default {
     height: 100px;
     /*background-color: #f3f5f7;*/
     background-color: #2E4835;
-    width: 375px;
+    width: 373px;
     margin: 0px;
     padding: 0px;
     border: 1px solid silver;
