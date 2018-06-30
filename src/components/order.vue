@@ -11,13 +11,13 @@
     <div class='right-menu' ref="foodWrapper">
       <el-menu>
         <li index="" v-for="bigItem in categoriesArr" class="catgHead catg-hook">
-            <div class="catgTitle" @click="clickInfo()">
+            <div class="catgTitle">
               <div class="catName">{{bigItem.category_name}}</div>
             </div>
             <el-menu>
-              <li index="" v-for='item in bigItem.dishes' class='food-item' @click="clickInfo()">
+              <li index="" v-for='item in bigItem.dishes' class='food-item'>
                 <img :src="item.image_url" class='img'>
-                <div class='m-name'>{{item.dish_name}}</div>
+                <div class='m-name' @click="clickInfo()">{{item.dish_name}}</div>
                 <div class='price'>$ {{item.price}}</div>
                 <div class='cc-wrapper'>
                   <cartcontrol :food="item"></cartcontrol>
