@@ -17,7 +17,7 @@
       <div class="bottom">
       <div class="totalPrice">$ {{total}}</div>
       <div class="pay">
-      <router-link class="payRT" :to="{path: '/confirm',query: {post_data: postData}}">支付</router-link>
+      <router-link class="payRT" :to="{path: '/confirm',query: {post_data: postData}}">提交订单</router-link>
       </div>
       </div>
       <!-- <router-link to='/'>返回</router-link> -->
@@ -151,7 +151,7 @@ export default {
 }
 .payRT {
     position: absolute;
-    left: 40px;
+    left: 30px;
     top: 17px;
     font-size: 20px;
 }

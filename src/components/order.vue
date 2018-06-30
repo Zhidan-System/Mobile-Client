@@ -1,6 +1,6 @@
 <template>
   <div class='goods'>
-    <div class="info" v-show="showInfo" @click="hideInfo">
+    <div class="info" v-show="showInfo" @click="hideInfo()">
       <div>
         <img :src="infoItem.image_url" class='info-img'>
         <div class='info-name'>{{infoItem.dish_name}}</div>
@@ -9,14 +9,14 @@
         <div class="infomation">详情介绍 : {{infoItem.description}}</div>
       </div>
     </div>
-    <div class='left-menu' ref="menuWrapper">
+    <div class='left-menu' ref="menuWrapper" @click="refreshCount()">
       <el-menu>
         <el-menu-item index="" class="left_menu" :class="{'current':currentIndex===index}" v-for='(item,index) in categoriesArr'>
           <span>{{item.category_name}}</span>
         </el-menu-item>
       </el-menu>
     </div>
-    <div class='right-menu' ref="foodWrapper">
+    <div class='right-menu' ref="foodWrapper" @click="refreshCount()">
       <el-menu>
         <li index="" v-for="bigItem in categoriesArr" class="catgHead catg-hook">
             <div class="catgTitle">
@@ -28,15 +28,15 @@
                 <div class='m-name' @click="clickInfo(item)">{{item.dish_name}}</div>
                 <div class='price'>$ {{item.price}}</div>
                 <div class='cc-wrapper'>
-                  <cartcontrol :food="item"></cartcontrol>
+                  <cartcontrol :food="item" v-model="item.count"></cartcontrol>
                 </div>
               </li>
             </el-menu>
-         </li> 
+         </li>
       </el-menu>
     </div>
     <!-- <div class='showSth' @click='showSelect'>showSomething</div> -->
-    <shopcart :foods="dishesArr" :seller='seller'></shopcart>
+    <shopcart :foods="dishesArr" :seller='seller' v-model="dishesArr"></shopcart>
   </div>
 </template>
 
@@ -128,18 +128,21 @@ export default {
         height += item.clientHeight;
         this.listHeight.push(height);
       }
-      console.log('this.listHeight')
-      console.log(this.listHeight)
+      // console.log('this.listHeight')
+      // console.log(this.listHeight)
     },
     clickInfo(item) {
-      console.log("clickInfo")
-      console.log(item)
+      // console.log("clickInfo")
+      // console.log(item)
       this.infoItem = item
       this.fold = true;
     },
     hideInfo() {
-      console.log('hideInfo')
+      // console.log('hideInfo')
       this.fold = false;
+    },
+    refreshCount() {
+      console.log('refreshCount')
     }
   }
   // computed: {
@@ -240,7 +243,7 @@ export default {
 .info {
   position: fixed;
   width: 200px;
-  height: 300px;
+  height: 250px;
   left: 100px;
   top: 200px;
   background-color: white;

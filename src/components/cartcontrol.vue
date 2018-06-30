@@ -19,6 +19,9 @@ import Vue from 'vue'
 
 export default {
   name: 'cartcontrol',
+  model: {
+    prop: 'num1'
+  },
   props: ['food'],
   created () {
     // console.log('cartcontrol-test: ')
@@ -29,14 +32,6 @@ export default {
     num1 : this.food.count;
   },
   methods: {
-      // handleChange () {
-      //     this.food.count = this.num1;
-      //     this.food.select = true;
-      //     if (this.food.count == 0) {
-      //         this.food.select = false;
-      //     }
-      //     console.log('handleChange')
-      // },
       add () {
         this.food.count++;
         console.log("add one item");

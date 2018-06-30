@@ -20,7 +20,7 @@
   				</div>
   				<el-button class="empty" type="warning" icon="el-icon-delete" @click="clearList" plain></el-button>
   			</div>
-  			<div class="list-content">
+  			<div class="list-content" ref="listWrapper">
   				<el-menu>
   					<li index="" class="food2" v-for="food in selectFoods">
   						<span class="name2">{{food.dish_name}}</span>
@@ -28,7 +28,7 @@
   							<span>{{food.price}} x {{food.count}}</span>
   						</div>
   						<div class="cc-wrapper2">
-  							<cartcontrol :food="food"></cartcontrol>
+  							<cartcontrol :food="food" v-model="food.count"></cartcontrol>
   						</div>
   					</li>
   				</el-menu>
@@ -42,16 +42,26 @@
 
 <script>
 import cartcontrol from './cartcontrol'
+import BScroll from 'better-scroll'
 
 export default {
   name: 'shopcart',
   props: ["foods", "seller"],
+  model: {
+  	prop: 'foods'
+  },
   data () {
   	return {
   		selectFoods: [],
   	  	fold: false,
   	  	total: 0
+  	  	// food: {}
   	  }
+  },
+  created() {
+  	this.$nextTick(() => {
+        this._initScroll();
+    })
   },
   computed: {
   	totalPrice () {
@@ -90,6 +100,9 @@ export default {
   			item.count = 0;
   			item.select = false;
   		}
+  	},
+  	_initScroll() {
+  		this.listScroll = new BScroll(this.$refs.listWrapper, {})
   	}
   	// computeTotal () {
   	// 	this.selectFoods = [];
