@@ -119,9 +119,10 @@ export default {
 	position: absolute;
 	/*top: 550px;*/
 	height: 60px;
-	width: 100%;
+	width: 375px;
 	bottom: 0;
 	z-index: 50;
+	left: 0;
 }
 .shopcart {
 	position: absolute;
@@ -166,7 +167,7 @@ export default {
 }
 .content-right {
 	position: absolute;
-	height: 60px;
+	height: 59px;
 	width: 130px;
 	background-color: orange;
 	/*box-shadow: 4px 4px 2px #444444;*/

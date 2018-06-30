@@ -37,6 +37,7 @@
     </div>
     <!-- <div class='showSth' @click='showSelect'>showSomething</div> -->
     <shopcart :foods="selectFoods" :seller='seller'></shopcart>
+    <!-- <div class="blank"></div> -->
   </div>
 </template>
 
@@ -178,6 +179,12 @@ export default {
 </script>
 
 <style>
+.blank{
+  width: 300px;
+  height: 100px;
+  background-color: yellow;
+  z-index: 1000;
+}
 .goods{
   display: flex;
   position:  absolute;
